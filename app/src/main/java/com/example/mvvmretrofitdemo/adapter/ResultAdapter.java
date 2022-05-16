@@ -39,7 +39,7 @@ public class ResultAdapter extends RecyclerView.Adapter<ResultAdapter.ResultView
         holder.popularityTextView.setText((Double.toString(results.get(position).getPopularity())));
 
         String imagePath = "https://image.tmdb.org/t/p/w500" + results.get(position).getPosterPath();
-        Glide.with(context).load(imagePath).into(holder.movieImageView);
+        Glide.with(context).load(imagePath).placeholder(R.drawable.progress_circle).into(holder.movieImageView);
     }
 
     @Override
