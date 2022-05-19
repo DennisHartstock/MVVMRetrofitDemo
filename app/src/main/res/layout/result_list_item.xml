@@ -4,7 +4,6 @@
     xmlns:bind="http://schemas.android.com/apk/res-auto">
 
     <data>
-
         <variable
             name="result"
             type="com.example.mvvmretrofitdemo.model.Result" />

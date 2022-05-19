@@ -1,6 +1,7 @@
 package com.example.mvvmretrofitdemo.view;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.DefaultItemAnimator;
@@ -13,6 +14,7 @@ import android.os.Bundle;
 
 import com.example.mvvmretrofitdemo.R;
 import com.example.mvvmretrofitdemo.adapter.ResultAdapter;
+import com.example.mvvmretrofitdemo.databinding.ActivityMainBinding;
 import com.example.mvvmretrofitdemo.model.MovieApiResponse;
 import com.example.mvvmretrofitdemo.model.Result;
 import com.example.mvvmretrofitdemo.service.MovieApiService;
@@ -32,18 +34,21 @@ public class MainActivity extends AppCompatActivity {
     private ResultAdapter adapter;
     private SwipeRefreshLayout swipeRefreshLayout;
     private MainActivityViewModel mainActivityViewModel;
+    private ActivityMainBinding activityMainBinding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        activityMainBinding = DataBindingUtil.setContentView(this, R.layout.activity_main);
+
         mainActivityViewModel = new ViewModelProvider.AndroidViewModelFactory(getApplication())
                 .create(MainActivityViewModel.class);
 
         getPopularMovies();
 
-        swipeRefreshLayout = findViewById(R.id.swiperefresh);
+        swipeRefreshLayout = activityMainBinding.swiperefresh;
         swipeRefreshLayout.setColorSchemeResources(com.google.android.material.R.color.design_default_color_primary);
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
@@ -64,7 +69,7 @@ mainActivityViewModel.getAllMovieData().observe(this, new Observer<List<Result>>
     }
 
     private void fillRecyclerView() {
-        recyclerView = findViewById(R.id.recyclerView);
+        recyclerView = activityMainBinding.recyclerView;
         adapter = new ResultAdapter(this, results);
 
         if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) {
