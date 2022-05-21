@@ -11,5 +11,5 @@ public interface MovieApiService {
     Call<MovieApiResponse> getPopularMovies(@Query("api_key") String apiKey);
 
     @GET("movie/popular")
-    Call<MovieApiResponse> getPopularMoviesWithPaging(@Query("page") String apiKey, long page);
+    Call<MovieApiResponse> getPopularMoviesWithPaging(@Query("page") String apiKey, int page);
 }
